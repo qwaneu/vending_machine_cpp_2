@@ -18,20 +18,27 @@ void deliver(CanType choice) {
     delivered_can = None;
 }
 
-TEST(vending_machine_test, choiceless_machine_deliver_nothing)
+class vending_machine_test : public ::testing::Test {
+  protected:
+    void deliver(CanType choice) {
+      ::deliver(choice);
+    }
+};
+
+TEST_F(vending_machine_test, choiceless_machine_deliver_nothing)
 {
   deliver(Cola);
   ASSERT_EQ(None,delivered_can);
 }
 
-TEST(vending_machine_test, machine_with_cola_delivers_cola_when_asked_for)
+TEST_F(vending_machine_test, machine_with_cola_delivers_cola_when_asked_for)
 {
   add_choice(Cola);
   deliver(Cola);
   ASSERT_EQ(Cola, delivered_can);
 }
 
-TEST(vending_machine_test, machine_with_fanta_delivers_fanta_when_asked_for)
+TEST_F(vending_machine_test, machine_with_fanta_delivers_fanta_when_asked_for)
 {
   add_choice(Fanta);
   add_choice(Cola);
