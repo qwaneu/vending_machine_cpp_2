@@ -1,35 +1,6 @@
 #include "gtest/gtest.h"
 #include <set>
-
-enum CanType { None, Cola, Fanta, Beer };
-
-
-class Bin {
-  public :
-    virtual void accept(CanType deliveredCan) = 0;
-};
-
-class VendingMachine {
-  public:
-    VendingMachine(Bin& deliverTo) : bin(deliverTo) {}
-
-    void add_choice(CanType canType) {
-      choices.insert(canType);
-    }
-
-    void deliver(CanType choice) {
-      std::set<CanType>::iterator result = choices.find(choice);
-      if (result != choices.end()) 
-        bin.accept(*result);
-      else 
-        bin.accept(None);
-    }
-
-
-  private:
-    std::set<CanType> choices;
-    Bin& bin;
-};
+#include "vending_machine.h"
 
 class vending_machine_test : public ::testing::Test, public Bin {
 
