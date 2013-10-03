@@ -42,13 +42,10 @@ class vending_machine_test : public ::testing::Test, public Bin {
     vending_machine_test() : machine(*this), delivered_can(None) {}
 
     virtual void SetUp() {
-      add_choice(Fanta);
-      add_choice(Cola);
+      machine.add_choice(Fanta);
+      machine.add_choice(Cola);
     }
 
-    void add_choice(CanType canType) {
-      machine.add_choice(canType);
-    }
     CanType deliver(CanType choice) {
       machine.deliver(choice);
       return delivered_can;
